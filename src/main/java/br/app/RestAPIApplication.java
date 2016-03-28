@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
 @EnableAutoConfiguration
-@ComponentScan("api")
+@ComponentScan("br")
 public class RestAPIApplication {
 	
 	/**
