@@ -52,6 +52,8 @@ dependencies {
 	// JSON
 	compile 'org.json:json:20151123'
     
+    // Spring Oauth 2.0
+    compile 'org.springframework.security.oauth:spring-security-oauth2:2.0.9.RELEASE'
 }
 
 // Configurações do eclipse
