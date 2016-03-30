@@ -1,2 +1,17 @@
 /bin/
 /build/
+
+# Eclipse configuration
+.classpath
+.project
+.settings/
+/WEB-INF
+
+# Gradle configuration
+.gradle/
+
+# Text editors
+*.swp
+*.orig
+*.directory
+*.~lock*
