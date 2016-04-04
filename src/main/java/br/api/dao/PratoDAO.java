@@ -36,6 +36,47 @@ public class PratoDAO {
 	}
 	
 	/**
+	 * Retorna uma lista de prato de acordo com os dias da semana passados
+	 * como parametros
+	 * @param diasSemana
+	 * @return
+	 */
+	public List<Prato> getByDiaSemana(List<String> diasSemana){
+		List<Prato> pratosFiltrados = new ArrayList<Prato>();
+		for (Prato prato : listaPratos) {
+			
+			for (int i = 0; i < diasSemana.size(); i++) {
+				String diaSemanaPrato = diasSemana.get(i);
+				if (prato.getDiasSemana().contains(diaSemanaPrato)){
+					pratosFiltrados.add(prato);
+					break;
+					
+				}
+			}
+		}
+		return pratosFiltrados;
+	}
+	
+	/**
+	 * Atualiza um prato
+	 * @param p prato
+	 */
+	public void updatePrato(Prato p){
+		for (int i = 0; i < this.listaPratos.size(); i++) {
+			if (this.listaPratos.get(i).getCodigo() == p.getCodigo()) {
+				this.listaPratos.get(i).setDescricao(p.getDescricao());
+				this.listaPratos.get(i).setDiasSemana(p.getDiasSemana());
+				this.listaPratos.get(i).setLivreGlicose(p.isLivreGlicose());
+				this.listaPratos.get(i).setLivreGluten(p.isLivreGluten());
+				this.listaPratos.get(i).setLivreLactose(p.isLivreLactose());
+				this.listaPratos.get(i).setQuantidadeKcal(p.getQuantidadeKcal());
+				this.listaPratos.get(i).setTipoPrato(p.getTipoPrato());
+				break;
+			}
+		}
+	}
+	
+	/**
 	 * Deleta um prato
 	 * @param p
 	 */

@@ -1,5 +1,6 @@
 package br.api.endpoint;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.api.dao.PratoDAO;
@@ -27,14 +29,20 @@ public class PratoController {
 	private PratoDAO pratoDAO;
 	
 	/**
-	 * GET todos os pratos. Possui parametros opcionais
+	 * GET todos os pratos. Possui parametros opcionais (dias da semana)
 	 * @param request Reques
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE + "; charset=UTF-8")
-	public ResponseEntity<?> getPratos(HttpServletRequest request) {
+	public ResponseEntity<?> getPratos(HttpServletRequest request,
+			@RequestParam(value = "diaSemana", required = false) List<String> diasSemana) {
 	 	try {
-	 		List<Prato> pratos = this.pratoDAO.getListaPratos();
+	 		List<Prato> pratos = new ArrayList<Prato>();
+	 		if (diasSemana != null){
+	 			pratos = this.pratoDAO.getByDiaSemana(diasSemana);
+	 		}else{
+	 			pratos = this.pratoDAO.getListaPratos();
+	 		}
 	 		
 	 		return new ResponseEntity<List<Prato>>(pratos, HttpStatus.OK);
 	 		
@@ -104,6 +112,35 @@ public class PratoController {
 	 		Prato prato = this.pratoDAO.getByCodigo(codigoPrato);
 	 		if (prato != null){
 	 			this.pratoDAO.deletePrato(prato);
+	 			return new ResponseEntity<String>(HttpStatus.OK);
+	 			
+	 		}
+	 		
+	 		return new ResponseEntity<Error>(new Error(404, "Prato não encontrado"), HttpStatus.NOT_FOUND); 
+	 		
+	 	} catch (Exception e) {
+	 		System.err.println(e.getMessage());
+	 		return new ResponseEntity<Error>(new Error(500, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+	 	} 	
+	}
+	
+	/**
+	 * Update prato pelo ID
+	 * @param request request
+	 * @param idPrato codigo do prato que vai ser deletado
+	 * @return
+	 */
+	@RequestMapping(value = "/{codigoPrato}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE + "; charset=UTF-8")
+	public ResponseEntity<?> putPratoByCodigo(HttpServletRequest request, @RequestBody String json,
+			@PathVariable int codigoPrato) {
+	 	try {
+	 		
+	 		JsonParser jsonParser = new JsonParser();
+
+	 		Prato checkPrato = this.pratoDAO.getByCodigo(codigoPrato);
+	 		if (checkPrato != null){
+	 			Prato pratoUpdated = jsonParser.jsonToPrato(json);
+	 			this.pratoDAO.updatePrato(pratoUpdated);
 	 			return new ResponseEntity<String>(HttpStatus.OK);
 	 			
 	 		}
