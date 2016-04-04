@@ -5,12 +5,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 @Configuration
-@Profile("dev")
-public class DevProfileConfig {
+@Profile("prod")
+public class ProdProfileConfig {
 
 	@Bean
 	public Estudante estudante() {
-		return new Estudante(1, "Loki", "novas tecnologias nti");
-		
+		return new Estudante(2, "Black Widow", "novas tecnologias nti");
 	}
 }

@@ -1,18 +1,16 @@
 package org.gradle;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-@Configuration
-@EnableAutoConfiguration
-@ComponentScan
 public class AppInitializer {
 
 	public static void main(String[] args) {
-		new SpringApplicationBuilder(AppInitializer.class).run(args);
-		DevProfileConfig profile = new DevProfileConfig();
-		System.out.println(profile.infoEstudante().toString());
+		@SuppressWarnings("resource")
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+		context.getEnvironment().setActiveProfiles("prod");
+		context.scan("org.gradle");
+		context.refresh();
+		Estudante estudante = context.getBean(Estudante.class);
+		System.out.println(estudante.toString());
 	}
 }

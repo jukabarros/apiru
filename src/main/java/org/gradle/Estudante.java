@@ -2,12 +2,30 @@ package org.gradle;
 
 public class Estudante {
 	
+	private int id;
+	private String nome;
 	private String curso;
-	private int ano;
 		
-	public Estudante(String estCurso, int estAno){
-		curso = estCurso;
-		ano = estAno;		
+	public Estudante(int id, String nome, String curso){
+		this.id = id;
+		this.nome = nome;
+		this.curso = curso;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getCurso() {
@@ -18,16 +36,7 @@ public class Estudante {
 		this.curso = curso;
 	}
 
-	public int getAno() {
-		return ano;
-	}
-
-	public void setAno(int ano) {
-		this.ano = ano;
-	}
-
-	@Override
 	public String toString() {
-		return "Estudante do curso: " + getCurso() + " ano: " + getAno();
+		return "Estudante id: " + getId() + " \nNome: " + getNome() + " \nCurso: " + getCurso();
 	}
 }
