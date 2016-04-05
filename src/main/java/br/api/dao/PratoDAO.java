@@ -1,6 +1,7 @@
 package br.api.dao;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -84,9 +85,59 @@ public class PratoDAO {
 		this.listaPratos.remove(p);
 	}
 	
+	private void insertInitPratos(){
+		Prato p1 = new Prato();
+		p1.setCodigo(1);
+		p1.setDescricao("Feijoada");
+		p1.setLivreGlicose(true);
+		p1.setLivreGluten(false);
+		p1.setLivreLactose(true);
+		p1.setQuantidadeKcal(900.45);
+		p1.setTipoPrato("Almoço");
+		p1.setDiasSemana(Arrays.asList("Segunda-Feira", "Quarta-Feira"));
+		
+		Prato p2 = new Prato();
+		p2.setCodigo(2);
+		p2.setDescricao("Buchada de Bode");
+		p2.setLivreGlicose(false);
+		p2.setLivreGluten(false);
+		p2.setLivreLactose(true);
+		p2.setQuantidadeKcal(892.66);
+		p2.setTipoPrato("Café da Manhã");
+		p2.setDiasSemana(Arrays.asList("Terça-Feira", "Quarta-Feira"));
+		
+		Prato p3 = new Prato();
+		p3.setCodigo(3);
+		p3.setDescricao("Angu com Leite");
+		p3.setLivreGlicose(false);
+		p3.setLivreGluten(true);
+		p3.setLivreLactose(false);
+		p3.setQuantidadeKcal(632.22);
+		p3.setTipoPrato("Janta");
+		p3.setDiasSemana(Arrays.asList("Terça-Feira", "Quinta-Feira"));
+		
+		Prato p4 = new Prato();
+		p4.setCodigo(4);
+		p4.setDescricao("Sarapatel");
+		p4.setLivreGlicose(true);
+		p4.setLivreGluten(false);
+		p4.setLivreLactose(true);
+		p4.setQuantidadeKcal(850.00);
+		p4.setTipoPrato("Almoço");
+		p4.setDiasSemana(Arrays.asList("Quarta-Feira", "Sexta-Feira"));
+		
+		this.listaPratos.add(p1);
+		this.listaPratos.add(p2);
+		this.listaPratos.add(p3);
+		this.listaPratos.add(p4);
+
+	}
 	
 	// GET AND SET
 	public List<Prato> getListaPratos() {
+		if (this.listaPratos.isEmpty()){
+			this.insertInitPratos();
+		}
 		return listaPratos;
 	}
 
