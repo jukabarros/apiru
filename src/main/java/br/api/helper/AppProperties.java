@@ -11,18 +11,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class AppProperties {
 
-	@Value("${server}")
-	private String server;
-	@Value("${user}")
+	@Value("${jdbc.url}")
+	private String url;
+	@Value("${jdbc.user}")
 	private String user;
-	@Value("${password}")
+	@Value("${jdbc.password}")
 	private String password;
 	
-	public String getServer() {
-		return server;
+	public String getUrl() {
+		return url;
 	}
-	public void setServer(String server) {
-		this.server = server;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	public String getUser() {
 		return user;
