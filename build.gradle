@@ -75,7 +75,14 @@ eclipseJdt << {
     f.append('encoding/<project>=utf-8')
 }
 
-
+// Processa recursos de acordo com o profile indicado
+processResources {
+    filesMatching('application.properties') {
+	    filter org.apache.tools.ant.filters.ReplaceTokens, tokens: [
+		activeProfiles: activeProfiles
+	    ]
+	}	
+}
 
 // Gradle wrapper
 task wrapper(type: Wrapper) {

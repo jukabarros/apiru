@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.api.dao.PratoDAO;
+import br.api.helper.AppProperties;
 import br.api.model.Prato;
 import br.api.util.JsonParser;
 import br.api.model.Error;
@@ -26,6 +27,9 @@ public class PratoController {
 	@Autowired
 	private PratoDAO pratoDAO;
 	
+	@Autowired
+	private AppProperties prop;
+	
 	/**
 	 * GET todos os pratos. Possui parametros opcionais
 	 * @param request Reques
@@ -35,7 +39,8 @@ public class PratoController {
 	public ResponseEntity<?> getPratos(HttpServletRequest request) {
 	 	try {
 	 		List<Prato> pratos = this.pratoDAO.getListaPratos();
-	 		
+
+			System.out.println(prop.toString());
 	 		return new ResponseEntity<List<Prato>>(pratos, HttpStatus.OK);
 	 		
 	 	} catch (Exception e) {

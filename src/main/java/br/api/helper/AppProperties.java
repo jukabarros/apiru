@@ -37,4 +37,9 @@ public class AppProperties {
 		this.password = password;
 	}
 	
+	@Override
+	public String toString() {
+		return "Dados da conexão: \nURL: " + getUrl() + " \nUSER: " + getUser() + " \nPASSWORD: " + getPassword();
+	}
+	
 }
