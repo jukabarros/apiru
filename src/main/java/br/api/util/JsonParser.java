@@ -24,13 +24,13 @@ public class JsonParser {
 		p.setQuantidadeKcal(jsonObj.getDouble("quantidadeKcal"));
 		p.setTipoPrato(jsonObj.getString("tipoPrato"));
 		
-		List<String> listSemanas = new ArrayList<String>();
 		JSONArray array = jsonObj.getJSONArray("diasSemana");
+		List<String> diasSemana = new ArrayList<String>();
 		for (int i = 0; i < array.length(); i++) {
-			listSemanas.add(array.getJSONObject(i).getString("dia"));
+			diasSemana.add(array.getString(i));
 		}
 		
-		p.setDiasSemana(listSemanas);
+		p.setDiasSemana(diasSemana);
 		
 		return p;
 	}

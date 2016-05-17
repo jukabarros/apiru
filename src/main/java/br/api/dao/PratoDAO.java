@@ -27,8 +27,8 @@ public class PratoDAO {
 	 * @return
 	 */
 	public Prato getByCodigo(Integer codigo){
-		for (int i = 0; i < listaPratos.size(); i++) {
-			Prato prato = this.listaPratos.get(i);
+		for (int i = 0; i < getListaPratos().size(); i++) {
+			Prato prato = getListaPratos().get(i);
 			if (codigo == prato.getCodigo()){
 				return prato;
 			}
@@ -44,7 +44,7 @@ public class PratoDAO {
 	 */
 	public List<Prato> getByDiaSemana(List<String> diasSemana){
 		List<Prato> pratosFiltrados = new ArrayList<Prato>();
-		for (Prato prato : listaPratos) {
+		for (Prato prato : getListaPratos()) {
 			
 			for (int i = 0; i < diasSemana.size(); i++) {
 				String diaSemanaPrato = diasSemana.get(i);
@@ -63,7 +63,7 @@ public class PratoDAO {
 	 * @param p prato
 	 */
 	public void updatePrato(Prato p){
-		for (int i = 0; i < this.listaPratos.size(); i++) {
+		for (int i = 0; i < getListaPratos().size(); i++) {
 			if (this.listaPratos.get(i).getCodigo() == p.getCodigo()) {
 				this.listaPratos.get(i).setDescricao(p.getDescricao());
 				this.listaPratos.get(i).setDiasSemana(p.getDiasSemana());
@@ -82,7 +82,7 @@ public class PratoDAO {
 	 * @param p
 	 */
 	public void deletePrato(Prato p){
-		this.listaPratos.remove(p);
+		getListaPratos().remove(p);
 	}
 	
 	private void insertInitPratos(){

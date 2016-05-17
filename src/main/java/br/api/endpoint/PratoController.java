@@ -37,6 +37,7 @@ public class PratoController {
 	public ResponseEntity<?> getPratos(HttpServletRequest request,
 			@RequestParam(value = "diaSemana", required = false) List<String> diasSemana) {
 	 	try {
+
 	 		List<Prato> pratos = new ArrayList<Prato>();
 	 		if (diasSemana != null){
 	 			pratos = this.pratoDAO.getByDiaSemana(diasSemana);
