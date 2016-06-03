@@ -34,7 +34,7 @@ public class PratoTest {
 	public static final int CODIGO_PRATO_DELETE = 2;
 	
 	static {
-		RestAssured.port = 9000;		
+		RestAssured.port = 9000;
 	}
 	
 	/**
